@@ -29,8 +29,9 @@ public class JukeBox {
     };
 
     public void addSong(String lineToParse) {
-        String [] tokens = lineToParse.split("/");
-        songList.add(tokens[0]);
+        Song [] tokens = lineToParse.split("/");
+        Song song = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
+        songList.add(song);
     }
 }
 
@@ -40,7 +41,7 @@ class Song {
     String rating;
     String bpm;
 
-    public Song(String t, String artist, String rating, String b) {
+    public Song(String t, String a, String r, String b) {
         title = t;
         artist = a;
         rating = r;
