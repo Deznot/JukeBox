@@ -12,6 +12,10 @@ public class JukeBox {
         System.out.println(songList);
         Collections.sort(songList);
         System.out.println(songList);
+
+        ArtistCompare artistCompare = new ArtistCompare();
+        Collections.sort(songList, artistCompare);
+        System.out.println(songList);
     }
 
     public void getSongs(){
@@ -32,6 +36,12 @@ public class JukeBox {
         String [] tokens = lineToParse.split("/");
         Song song = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
         songList.add(song);
+    }
+
+    class ArtistCompare implements Comparator<Song> {
+        public int compare(Song one, Song two) {
+            return one.getArtist().compareTo(two.getArtist());
+        }
     }
 }
 
@@ -65,7 +75,7 @@ class Song implements Comparable<Song> {
     }
 
     public String toString() {
-        return title;
+        return title + '-' + artist;
     }
 
     public int compareTo(Song inSong) {
@@ -86,4 +96,6 @@ class Song implements Comparable<Song> {
             return -1;
         }
     }
+
+   
 }
