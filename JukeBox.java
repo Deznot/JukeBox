@@ -29,13 +29,13 @@ public class JukeBox {
     };
 
     public void addSong(String lineToParse) {
-        Song [] tokens = lineToParse.split("/");
+        String [] tokens = lineToParse.split("/");
         Song song = new Song(tokens[0], tokens[1], tokens[2], tokens[3]);
         songList.add(song);
     }
 }
 
-class Song {
+class Song implements Comparable<Song> {
     String title;
     String artist;
     String rating;
@@ -68,4 +68,22 @@ class Song {
         return title;
     }
 
-}   
+    public int compareTo(Song inSong) {
+        //return this.title.compareTo(inSong.getTitle());
+        int minLength = Math.min(this.title.length(), inSong.title.length());
+        for (int i = 0; i < minLength; i++) {
+            if((int) this.title.charAt(i) == (int) inSong.title.charAt(i)) {
+                continue;
+            }else if((int) this.title.charAt(i) > (int) inSong.title.charAt(i)){
+                return 1;
+            }else {
+                return -1;
+            }
+        }
+        if (this.title.length() > inSong.title.length()) {
+            return 1;
+        }else {
+            return -1;
+        }
+    }
+}
