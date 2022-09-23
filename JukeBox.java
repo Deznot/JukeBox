@@ -16,6 +16,12 @@ public class JukeBox {
         ArtistCompare artistCompare = new ArtistCompare();
         Collections.sort(songList, artistCompare);
         System.out.println(songList);
+
+
+        HashSet<Song> setSong = new HashSet<Song>();
+        setSong.addAll(songList);
+        System.out.println(setSong);
+
     }
 
     public void getSongs(){
@@ -56,6 +62,16 @@ class Song implements Comparable<Song> {
         artist = a;
         rating = r;
         bpm = b;
+    }
+
+    public boolean equals(Object aSong) {
+        //title this is string. String has method quals.
+        Song s = (Song) aSong;
+        return getTitle().equals(s.getTitle());
+    }
+
+    public int hashCode() {
+        return title.hashCode();
     }
 
     public String getTitle() {
