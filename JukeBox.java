@@ -17,10 +17,17 @@ public class JukeBox {
         Collections.sort(songList, artistCompare);
         System.out.println(songList);
 
+        System.out.println("check " + songList.get(6).equals(songList.get(7)));
 
         HashSet<Song> setSong = new HashSet<Song>();
         setSong.addAll(songList);
         System.out.println(setSong);
+
+        NameCompare nCompare = new NameCompare();
+        TreeSet<Song> treeSetSong = new TreeSet<Song>(nCompare);
+        treeSetSong.addAll(songList);
+        System.out.println(treeSetSong);
+
 
     }
 
@@ -44,6 +51,12 @@ public class JukeBox {
         songList.add(song);
     }
 
+    class NameCompare implements Comparator<Song> {
+        public int compare(Song one, Song two) {
+            return one.getTitle().compareTo(two.getTitle());
+        }
+    }
+
     class ArtistCompare implements Comparator<Song> {
         public int compare(Song one, Song two) {
             return one.getArtist().compareTo(two.getArtist());
@@ -63,7 +76,7 @@ class Song implements Comparable<Song> {
         rating = r;
         bpm = b;
     }
-
+ 
     public boolean equals(Object aSong) {
         //title this is string. String has method quals.
         Song s = (Song) aSong;
